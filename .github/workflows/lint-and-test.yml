@@ -51,12 +51,9 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v3
 
-    # https://github.com/hashicorp/setup-terraform/issues/33
-    - name: hack for github internal repo access
-      run: git config --global url."https://${{ secrets.PRIVATE_TF_PAT }}@github.com/".insteadOf "https://github.com/"
-
     - name: Run Terrascan
       uses: tenable/terrascan-action@main
       with:
         iac_type: 'terraform'
         non_recursive: true
+        scm_token: ${{ secrets.PRIVATE_TF_PAT }}
