@@ -5,12 +5,11 @@ terraform {
 module "pve-vm-cluster" {
   source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm"
   count  = var.cluster_node_count
-  
+
   // Authentication Vars
   ansible_service_account_ssh_key = var.ansible_service_account_ssh_key
 
   // PVE Vars Shared Across All VMs
-  pve_cluster_url           = var.pve_cluster_url
   pve_template              = var.pve_template
   pve_vm_full_clone         = var.pve_vm_full_clone
   pve_vm_core_count         = var.pve_vm_core_count
@@ -33,14 +32,12 @@ module "pve-vm-cluster" {
 
 
   // PowerDNS Vars Shared Across All VMs
-  pdns_url  = var.pdns_url
   pdns_zone = var.pdns_zone
 
   // PowerDNS Vars Unique To Each VM
   pdns_record_name = var.pdns_record_name_list[count.index]
 
   // AWX Vars Shared Across All VMs
-  awx_url          = var.awx_url
   awx_organization = var.awx_organization
   awx_inventory    = var.awx_inventory
   awx_host_groups  = var.awx_host_groups

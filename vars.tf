@@ -21,11 +21,6 @@ variable "ansible_service_account_ssh_key" {
 # PVE Variables #
 #################
 
-variable "pve_cluster_url" {
-  type        = string
-  description = "URL for the ProxMox cluster"
-}
-
 variable "pve_vm_name_base" {
   description = "base name of the VM to create"
   type        = string
@@ -115,11 +110,6 @@ variable "pve_vm_disk_storage_location_list" {
 # PowerDNS #
 ############
 
-variable "pdns_url" {
-  description = "URL for the PowerDNS server"
-  type        = string
-}
-
 variable "pdns_zone" {
   description = "name of the PowerDNS zone to create the record in"
   type        = string
@@ -133,11 +123,6 @@ variable "pdns_record_name_list" {
 #################
 # AWX Variables #
 #################
-
-variable "awx_url" {
-  description = "URL for the AWX server"
-  type        = string
-}
 
 variable "awx_organization" {
   description = "name of the AWX organization to create the host in"
