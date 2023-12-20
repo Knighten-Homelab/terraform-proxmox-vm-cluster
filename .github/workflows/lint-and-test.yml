@@ -1,0 +1,54 @@
+---
+name: Lint and Test
+run-name: Lint/Test for PR #${{ github.event.number }} on ${{ github.head_ref }}
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Install Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Setup TFLint
+      uses: terraform-linters/setup-tflint@v3
+
+    - name: Init TFLint
+      run: tflint --init
+
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true
+
+    - name: Terraform Init
+      id: init
+      run: terraform init
+    
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
+
+    - name: Run TFLint
+      run: tflint -f compact
+
+  security-test:
+    runs-on: ubuntu-latest
+    needs:
+      - lint
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Run Terrascan
+      uses: tenable/terrascan-action@main
+      with:
+        iac_type: 'terraform'
+        non_recursive: true
