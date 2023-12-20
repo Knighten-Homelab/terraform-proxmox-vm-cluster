@@ -30,7 +30,7 @@ jobs:
 
     # https://github.com/hashicorp/setup-terraform/issues/33
     - name: hack for github internal repo access
-      run: git config --global url."https://oauth2:${{ secrets.PRIVATE_TF_PAT }}@github.com/".insteadOf "git@github.com:"
+      run: git config --global url."https://${{ secrets.PRIVATE_TF_PAT }}@github.com/".insteadOf "https://github.com/"
 
 
     - name: Terraform Init
