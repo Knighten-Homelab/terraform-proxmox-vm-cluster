@@ -12,34 +12,9 @@ variable "cluster_node_count" {
 #  Required Auth Variables #
 ############################
 
-variable "pve_username" {
-  type        = string
-  description = "username for the ProxMox API"
-}
-
-variable "pve_password" {
-  type        = string
-  description = "password for the ProxMox API "
-}
-
 variable "ansible_service_account_ssh_key" {
   type        = string
   description = "SSH key for the ansible service account"
-}
-
-variable "pdns_api_key" {
-  type        = string
-  description = "API key for the PowerDNS API"
-}
-
-variable "awx_account_username" {
-  type        = string
-  description = "username used to interact with the AWX API"
-}
-
-variable "awx_account_password" {
-  type        = string
-  description = "password used to interact with the AWX API"
 }
 
 #################

@@ -5,13 +5,9 @@ terraform {
 module "pve-vm-cluster" {
   source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm"
   count  = var.cluster_node_count
+  
   // Authentication Vars
-  pve_username                    = var.pve_username
-  pve_password                    = var.pve_password
   ansible_service_account_ssh_key = var.ansible_service_account_ssh_key
-  pdns_api_key                    = var.pdns_api_key
-  awx_account_username            = var.awx_account_username
-  awx_account_password            = var.awx_account_password
 
   // PVE Vars Shared Across All VMs
   pve_cluster_url           = var.pve_cluster_url

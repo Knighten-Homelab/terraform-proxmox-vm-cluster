@@ -32,7 +32,6 @@ jobs:
     - name: hack for github internal repo access
       run: git config --global url."https://${{ secrets.PRIVATE_TF_PAT }}@github.com/".insteadOf "https://github.com/"
 
-
     - name: Terraform Init
       id: init
       run: terraform init
