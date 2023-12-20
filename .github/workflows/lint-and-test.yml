@@ -28,9 +28,10 @@ jobs:
       run: terraform fmt -check
       continue-on-error: true
 
-      # https://github.com/hashicorp/setup-terraform/issues/33
+    # https://github.com/hashicorp/setup-terraform/issues/33
     - name: hack for github internal repo access
-      run: git config --global url."https://oauth2:${{ secrets.PRIVATE_TF_PAT }}@github.com".insteadOf ssh://git@github.com
+      run: git config --global url."https://oauth2:${{ secrets.PRIVATE_TF_PAT }}@github.com/".insteadOf "git@github.com:"
+
 
     - name: Terraform Init
       id: init
