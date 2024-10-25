@@ -45,7 +45,7 @@ module "pve-vm-cluster" {
   pve_cloudinit_storage_location = var.pve_cloudinit_storage_location
   pve_vm_use_static_ip           = !var.all_dhcp
   pve_vm_ip                      = var.all_dhcp ? null : var.static_addresses[count.index].ip_address
-  pve_vm_subnet_network_bits     = var.all_dhcp ? null : var.static_addresses[count.index].subnet_network_bits
+  pve_vm_subnet_network_bits     = var.all_dhcp ? null : var.static_addresses[count.index].network_bits
   pve_vm_gateway                 = var.all_dhcp ? null : var.static_addresses[count.index].gateway
 
   # Disk Configuration
