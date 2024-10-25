@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.0.1...1.1.0) (2024-10-25)
+
+### Features
+
+* added the remaining pve variables to module ([442ca87](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/442ca87d25be401d95081cee4d39ffa27841a40a))
+
 ## [1.0.1](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.0.0...1.0.1) (2024-10-25)
 
 ### Bug Fixes
