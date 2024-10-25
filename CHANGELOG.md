@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.1.0...1.1.1) (2024-10-25)
+
+### Bug Fixes
+
+* correct network_bits variable name ([186ed4a](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/186ed4a6605435899c3ef15e24a0c4ffcd44eb7a))
+
 ## [1.1.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.0.1...1.1.0) (2024-10-25)
 
 ### Features
