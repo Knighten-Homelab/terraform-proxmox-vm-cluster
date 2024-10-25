@@ -29,6 +29,7 @@ variable "auto_increment_vm_id_start" {
 variable "vm_id_list" {
   type        = list(number)
   description = "list of VM IDs for each VM"
+  default     = []
 }
 
 # VM Name Variables
