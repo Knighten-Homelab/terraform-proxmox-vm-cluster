@@ -1,3 +1,9 @@
+## [1.2.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.1.1...1.2.0) (2024-10-27)
+
+### Features
+
+* added basic output for module ([c7fa863](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/c7fa8637781158045ca6218710385054cadeeca8))
+
 ## [1.1.1](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.1.0...1.1.1) (2024-10-25)
 
 ### Bug Fixes
