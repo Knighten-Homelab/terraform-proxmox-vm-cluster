@@ -20,7 +20,7 @@
 
 ### Bug Fixes
 
-* made vm_id_list default to empty list ([f83ccdb](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/f83ccdb88acf12f15af5e1225186f3eaf636523e))
+* made pve_id_list default to empty list ([f83ccdb](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/f83ccdb88acf12f15af5e1225186f3eaf636523e))
 * updated telmate/proxmox entry in terraform lock file ([647e891](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/647e8919fb951129c185c656a58ef28202fee8fc))
 
 ## [1.0.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/...1.0.0) (2024-10-25)
