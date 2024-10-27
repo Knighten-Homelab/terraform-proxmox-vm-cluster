@@ -56,12 +56,14 @@ module "pve-vm-cluster" {
   # Agent Options
   pve_use_agent = var.pve_use_agent
 
-  pdns_zone        = "homelab.lan"
-  pdns_record_name = format("%s-%s", "test-vm", count.index)
+  # PDNS Options
+  pdns_zone        = var.pdns_zone
+  pdns_record_name = var.pdns_record_name_list[count.index]
 
-  awx_organization     = "Homelab"
-  awx_inventory        = "Homelab Endpoints"
-  awx_host_groups      = ["proxmox-hosts"]
-  awx_host_name        = format("%s-%s", "test-vm", count.index)
-  awx_host_description = "A test VM created by Terraform"
+  # AWX Options
+  awx_organization     = var.awx_organization
+  awx_inventory        = var.awx_inventory
+  awx_host_groups      = var.awx_host_groups
+  awx_host_name        = var.awx_host_name_list[count.index]
+  awx_host_description = var.awx_use_same_host_descrip ? var.awx_host_descrip : var.awx_host_descrip_list[count.index]
 }

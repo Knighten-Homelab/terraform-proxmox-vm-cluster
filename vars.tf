@@ -277,3 +277,57 @@ variable "pve_use_agent" {
   description = "whether or not to use the agent"
   default     = 1
 }
+
+#################
+# AWX Variables #
+#################
+
+variable "awx_organization" {
+  type        = string
+  description = "name of the AWX organization to create the host in"
+}
+
+variable "awx_inventory" {
+  type        = string
+  description = "name of the AWX inventory to create the host in"
+}
+
+variable "awx_host_groups" {
+  type        = list(string)
+  description = "comma separated list of AWX host groups to add the host to"
+}
+
+variable "awx_host_name_list" {
+  type        = list(string)
+  description = "names of the AWX host to create"
+}
+
+variable "awx_use_same_host_descrip" {
+  type        = bool
+  description = "whether or not to use the same description for all AWX hosts"
+}
+
+variable "awx_host_descrip" {
+  type        = string
+  description = "description of the AWX host to create"
+}
+
+variable "awx_host_descrip_list" {
+  type        = list(string)
+  description = "description of the AWX host to create"
+  default     = []
+}
+
+############
+# PowerDNS #
+############
+
+variable "pdns_zone" {
+  type        = string
+  description = "name of the PowerDNS zone to create the record in"
+}
+
+variable "pdns_record_name_list" {
+  type        = list(string)
+  description = "names of the PowerDNS record to for each VM"
+}
