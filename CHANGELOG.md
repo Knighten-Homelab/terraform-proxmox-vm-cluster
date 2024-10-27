@@ -1,3 +1,14 @@
+## [1.3.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.2.0...1.3.0) (2024-10-27)
+
+### Bug Fixes
+
+* updated terraform-homelab-pve-vm to 1.4.0 and update var names ([c34d3a2](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/c34d3a2d0ed18ea6422779ff3099a36f797ffa72))
+* updated to 1.3.5 terraform-homelab-pve-vm module ([e8d4f60](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/e8d4f60d0012944fb065c41a48f3a1b0df359c30))
+
+### Features
+
+* added awx and pdns vars ([d63399b](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/d63399b31f1dd0ae73e33ea6974d986a3a7e259e))
+
 ## [1.2.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.1.1...1.2.0) (2024-10-27)
 
 ### Features
