@@ -1,3 +1,9 @@
+## [1.3.2](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.3.1...1.3.2) (2024-10-27)
+
+### Bug Fixes
+
+* correct accidentl bad name for vm_dns_records output ([9320bd6](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/9320bd68eeccd26a9be880120c6398fb345bdbb7))
+
 ## [1.3.1](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.3.0...1.3.1) (2024-10-27)
 
 ### Bug Fixes
