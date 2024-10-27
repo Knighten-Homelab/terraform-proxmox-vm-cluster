@@ -1,3 +1,9 @@
+## [1.3.1](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.3.0...1.3.1) (2024-10-27)
+
+### Bug Fixes
+
+* corrected vars used in output ([d7143d3](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/d7143d36d3fd1a5a7af7641af08d4aa7e23e78f5))
+
 ## [1.3.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.2.0...1.3.0) (2024-10-27)
 
 ### Bug Fixes
