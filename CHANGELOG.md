@@ -1,3 +1,9 @@
+## [1.3.3](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.3.2...1.3.3) (2024-10-28)
+
+### Bug Fixes
+
+* corrected inversion of dhcp param ([c64192a](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/c64192aa28f62fa493618b8cb1560ae4d9fb0b78))
+
 ## [1.3.2](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.3.1...1.3.2) (2024-10-27)
 
 ### Bug Fixes
