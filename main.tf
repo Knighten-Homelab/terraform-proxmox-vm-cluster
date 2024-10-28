@@ -43,7 +43,7 @@ module "pve-vm-cluster" {
   pve_ci_ssh_private_key     = var.pve_ci_ssh_private_key
   pve_ci_dns_servers         = var.pve_ci_dns_servers
   pve_ci_storage_location    = var.pve_ci_storage_location
-  pve_ci_use_dhcp            = !var.pve_ci_all_use_dhcp
+  pve_ci_use_dhcp            = var.pve_ci_all_use_dhcp
   pve_ci_ip_address          = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].ip_address
   pve_ci_subnet_network_bits = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].network_bits
   pve_ci_gateway_address     = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].gateway
