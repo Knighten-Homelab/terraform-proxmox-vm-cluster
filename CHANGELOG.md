@@ -1,3 +1,9 @@
+## [1.4.1](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.4.0...1.4.1) (2024-10-29)
+
+### Bug Fixes
+
+* correct output description and Example heading ([b1f64b1](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/b1f64b1f6d445f92aad3d7be90a6b4002f6110e0))
+
 ## [1.4.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.3.3...1.4.0) (2024-10-29)
 
 ### Features
