@@ -28,7 +28,7 @@ variable "pve_auto_increment_id_start" {
 
 variable "pve_id_list" {
   type        = list(number)
-  description = "list of VM IDs for each VM"
+  description = "list of VM IDs to use for each VM, if not using auto incrementing"
   default     = []
 }
 
@@ -42,13 +42,13 @@ variable "pve_auto_increment_names" {
 
 variable "pve_base_name" {
   type        = string
-  description = "base name to use for auto generated node names"
+  description = "base name to use for auto generated node names, if using auto increment"
   default     = "node"
 }
 
 variable "pve_name_list" {
   type        = list(string)
-  description = "list of names for each VM"
+  description = "list of names to use for each VM, if not using auto incrementing"
   default     = []
 }
 
@@ -62,13 +62,13 @@ variable "pve_use_same_node" {
 
 variable "pve_node" {
   type        = string
-  description = "name of the ProxMox node to create all VMs on"
+  description = "name of the ProxMox node to create all VMs on, if pve_use_same_nod` == true"
   default     = "primary"
 }
 
 variable "pve_node_assignments" {
   type        = list(string)
-  description = "list of nodes to deploy for each VM"
+  description = "list of nodes to deploy for each VM, if not deploying all to same node"
   default     = []
 }
 
@@ -82,13 +82,13 @@ variable "pve_same_descrip" {
 
 variable "pve_desc" {
   type        = string
-  description = "description to use for all VMs"
+  description = "description to use for all VMs, if using pve_same_descrip == true"
   default     = "cluster node"
 }
 
 variable "pve_desc_list" {
   type        = list(string)
-  description = "list of descriptions for each VM"
+  description = "list of descriptions to use for each VM, if not using same description for all vms "
   default     = []
 }
 
@@ -96,13 +96,13 @@ variable "pve_desc_list" {
 
 variable "pve_is_clone" {
   type        = bool
-  description = "Flag to determine if the VM is a clone or not (based off iso)"
+  description = "flag to determine if each VM is a clone or not (based off iso)"
   default     = true
 }
 
 variable "pve_template" {
   type        = string
-  description = "name of the PVE template to clone"
+  description = "name of the template to clone each VM from"
   default     = "ubuntu-server-22-04-base-template-homelab"
 }
 
@@ -114,7 +114,7 @@ variable "pve_full_clone" {
 
 variable "pve_iso" {
   type        = string
-  description = "iso to use for the VM"
+  description = "name of the iso to use for each VM, if not cloning"
   default     = ""
 }
 
@@ -122,19 +122,19 @@ variable "pve_iso" {
 
 variable "pve_boot_on_start" {
   type        = bool
-  description = "whether or not to boot the VM on start"
+  description = "whether or not to boot each VM on start"
   default     = false
 }
 
 variable "pve_startup_options" {
   type        = string
-  description = "startup options seperated via comma: boot order (order=), startup delay(up=), and shutdown delay(down=)"
+  description = "startup options separated with commas: boot order (order=), startup delay(up=), and shutdown delay(down=)"
   default     = ""
 }
 
 variable "pve_boot_disk" {
   type        = string
-  description = "boot disk for the VM"
+  description = "boot disk for each VM"
   default     = null
 }
 
@@ -142,19 +142,19 @@ variable "pve_boot_disk" {
 
 variable "pve_core_count" {
   type        = string
-  description = "number of cores to allocate to the VM"
+  description = "number of cores to allocate to each VM"
   default     = "2"
 }
 
 variable "pve_cpu_type" {
   type        = string
-  description = "type of CPU to use for the VM"
+  description = "type of CPU to use for each VM"
   default     = "host"
 }
 
 variable "pve_sockets" {
   type        = string
-  description = "number of sockets to allocate to the VM"
+  description = "number of sockets to allocate to each VM"
   default     = "1"
 }
 
@@ -202,13 +202,13 @@ variable "pve_use_ci" {
 
 variable "pve_ci_ssh_user" {
   type        = string
-  description = "ssh user to used to provision the VM"
+  description = "ssh user used to provision the VM"
   default     = "ansible"
 }
 
 variable "pve_ci_ssh_private_key" {
   type        = string
-  description = "ssh private key to used to provision the VM"
+  description = "ssh private key used to provision the VM"
   default     = ""
 }
 
@@ -220,10 +220,12 @@ variable "pve_ci_all_use_dhcp" {
 
 variable "pve_ci_static_address_list" {
   type = list(object({
-    ip_address   = string
-    network_bits = string
-    gateway      = string
+    ip_address         = string
+    cidr_prefix_length = string
+    gateway            = string
   }))
+  description = "list of static addresses objects to use for each VM (one per VM), if not using DHCP for all VMs"
+  default     = null
 }
 
 variable "pve_ci_dns_servers" {
@@ -254,13 +256,13 @@ variable "pve_use_same_disk_storage_location" {
 
 variable "pve_disk_storage_location" {
   type        = string
-  description = "storage location for the VM disk"
+  description = "storage location for the VM disk in all VMs, used if `pve_use_same_disk_storage_location` == `true`"
   default     = "local-zfs"
 }
 
 variable "pve_disk_storage_location_list" {
   type        = list(string)
-  description = "list of storage locations for each VM disk"
+  description = "list of storage locations for each VM disk, if not using same the same location "
   default     = []
 }
 
@@ -274,7 +276,7 @@ variable "pve_scsihw" {
 
 variable "pve_use_agent" {
   type        = number
-  description = "whether or not to use the agent"
+  description = "whether or not to use the agent in each VM"
   default     = 1
 }
 
@@ -299,7 +301,7 @@ variable "awx_host_groups" {
 
 variable "awx_host_name_list" {
   type        = list(string)
-  description = "names of the AWX host to create"
+  description = "list of names for each AWX host to create"
 }
 
 variable "awx_use_same_host_descrip" {
@@ -309,12 +311,12 @@ variable "awx_use_same_host_descrip" {
 
 variable "awx_host_descrip" {
   type        = string
-  description = "description of the AWX host to create"
+  description = "description for each AWX host created "
 }
 
 variable "awx_host_descrip_list" {
   type        = list(string)
-  description = "description of the AWX host to create"
+  description = "list of descriptions for each AWX host created "
   default     = []
 }
 
@@ -329,5 +331,5 @@ variable "pdns_zone" {
 
 variable "pdns_record_name_list" {
   type        = list(string)
-  description = "names of the PowerDNS record to for each VM"
+  description = "list of names used for PowerDNS records created for VMs"
 }

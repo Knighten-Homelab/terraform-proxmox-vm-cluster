@@ -1,5 +1,5 @@
 module "pve-vm-cluster" {
-  source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm?ref=1.4.0"
+  source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm?ref=1.4.1"
   count  = var.node_count
 
   # Core PVE Fields
@@ -34,15 +34,15 @@ module "pve-vm-cluster" {
   pve_networks = var.pve_networks
 
   # Cloud-Init Options
-  pve_use_ci                 = var.pve_use_ci
-  pve_ci_ssh_user            = var.pve_ci_ssh_user
-  pve_ci_ssh_private_key     = var.pve_ci_ssh_private_key
-  pve_ci_dns_servers         = var.pve_ci_dns_servers
-  pve_ci_storage_location    = var.pve_ci_storage_location
-  pve_ci_use_dhcp            = var.pve_ci_all_use_dhcp
-  pve_ci_ip_address          = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].ip_address
-  pve_ci_subnet_network_bits = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].network_bits
-  pve_ci_gateway_address     = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].gateway
+  pve_use_ci                = var.pve_use_ci
+  pve_ci_ssh_user           = var.pve_ci_ssh_user
+  pve_ci_ssh_private_key    = var.pve_ci_ssh_private_key
+  pve_ci_dns_servers        = var.pve_ci_dns_servers
+  pve_ci_storage_location   = var.pve_ci_storage_location
+  pve_ci_use_dhcp           = var.pve_ci_all_use_dhcp
+  pve_ci_ip_address         = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].ip_address
+  pve_ci_cidr_prefix_length = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].cidr_prefix_length
+  pve_ci_gateway_address    = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].gateway
 
   # Disk Configuration
   pve_disk_size             = var.pve_disk_size
