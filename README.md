@@ -202,7 +202,7 @@ Here is the expected object structure for the `vm_details` output:
 
 ## Usage
 
-### Example - 3 VMs Cloned From A Template Using Cloud-Init
+### Example - 3 VMs Cloned From A Template Provisioned Via Cloud-Init
 
 ```hcl
 module "pve-vm-cluster" {

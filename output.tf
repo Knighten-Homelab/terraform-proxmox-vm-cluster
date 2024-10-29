@@ -7,5 +7,5 @@ output "vm_details" {
       vm_dns_records = module.pve-vm-cluster[i].vm_dns_records
     }
   ]
-  description = "List of VM details including VM ID, VM Descrip,SIP, and DNS record."
+  description = "list of VM details including VM ID, VM Descrip,SIP, and DNS record"
 }
