@@ -1,7 +1,3 @@
-terraform {
-  required_version = "1.9.8"
-}
-
 module "pve-vm-cluster" {
   source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm?ref=1.4.0"
   count  = var.node_count
