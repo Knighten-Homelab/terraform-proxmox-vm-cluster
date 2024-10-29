@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.3.3...1.4.0) (2024-10-29)
+
+### Features
+
+* moved to 1.4.1 of terraform-homelab-pve-vm and added README.md ([820981e](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/820981ecd43def077490ceffabde8af7514a6f2b))
+
 ## [1.3.3](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.3.2...1.3.3) (2024-10-28)
 
 ### Bug Fixes
