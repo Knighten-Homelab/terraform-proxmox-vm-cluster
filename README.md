@@ -125,6 +125,9 @@ default = [
 | `pve_use_ci`                 | whether or not to use the cloud_init                                                            | `bool`         | `true`      |    no    |
 | `pve_ci_ssh_user`            | ssh user used to provision the VM                                                               | `string`       | `ansible`   |    no    |
 | `pve_ci_ssh_private_key`     | ssh private key used to provision the VM                                                        | `string`       | `""`        |    no    |
+| `pve_ci_ssh_keys`            | ssh public keys to assigned to ci user authorized_keys                                          | `list(string)` | `           |    no    |
+| `pve_ci_user`                | cloud-init user                                                                                 | `string`       | `ansible`   |    no    |
+| `pve_ci_password`            | cloud-init password                                                                             | `string`       | `ansible`   |    no    |
 | `pve_ci_all_use_dhcp`        | whether or not to use DHCP for all VMs                                                          | `bool`         | `true`      |    no    |
 | `pve_ci_dns_servers`         | ip of vm's dns server                                                                           | `string`       | `""`        |    no    |
 | `pve_ci_storage_location`    | storage location for the cloud-init iso                                                         | `string`       | `local-zfs` |    no    |
@@ -157,6 +160,14 @@ For the `pve_ci_static_address_list` this is the expected object structure (one 
 | Name            | Description                                | Type     | Default | Required |
 | --------------- | ------------------------------------------ | -------- | ------- | :------: |
 | `pve_use_agent` | whether or not to use the agent in each VM | `number` | `1`     |    no    |
+
+#### Serial Options
+
+| Name              | Description                                      | Type     | Default  | Required |
+| ----------------- | ------------------------------------------------ | -------- | -------- | :------: |
+| `pve_add_serial`  | whether or not to add a serial device to each VM | `bool`   | `false`  |    no    |
+| `[ve_serial_type` | type of serial device to add to each VM          | `string` | `socket` |    no    |
+| `pve_serial_id`   | id of the serial device to add to each VM        | `string` | `1`      |    no    |
 
 ### AWX Variables
 
