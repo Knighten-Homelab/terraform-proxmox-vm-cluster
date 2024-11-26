@@ -1,5 +1,5 @@
 module "pve-vm-cluster" {
-  source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm?ref=1.4.1"
+  source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm?ref=1.7.0"
   count  = var.node_count
 
   # Core PVE Fields
@@ -34,9 +34,13 @@ module "pve-vm-cluster" {
   pve_networks = var.pve_networks
 
   # Cloud-Init Options
-  pve_use_ci                = var.pve_use_ci
+  pve_use_ci = var.pve_use_ci
+
   pve_ci_ssh_user           = var.pve_ci_ssh_user
   pve_ci_ssh_private_key    = var.pve_ci_ssh_private_key
+  pve_ci_ssh_keys           = var.pve_ci_ssh_keys
+  pve_ci_user               = var.pve_ci_user
+  pve_ci_password           = var.pve_ci_password
   pve_ci_dns_servers        = var.pve_ci_dns_servers
   pve_ci_storage_location   = var.pve_ci_storage_location
   pve_ci_use_dhcp           = var.pve_ci_all_use_dhcp
@@ -51,6 +55,10 @@ module "pve-vm-cluster" {
 
   # Agent Options
   pve_use_agent = var.pve_use_agent
+
+  pve_add_serial  = var.pve_add_serial
+  pve_serial_type = var.pve_serial_type
+  pve_serial_id   = var.pve_serial_id
 
   # PDNS Options
   pdns_zone        = var.pdns_zone

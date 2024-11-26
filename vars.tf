@@ -208,8 +208,26 @@ variable "pve_ci_ssh_user" {
 
 variable "pve_ci_ssh_private_key" {
   type        = string
-  description = "ssh private key used to provision the VM"
+  description = "ssh private key to used to provision the VM"
   default     = ""
+}
+
+variable "pve_ci_ssh_keys" {
+  type        = list(string)
+  description = "ssh public keys to assigned to ci user authorized_keys"
+  default     = []
+}
+
+variable "pve_ci_user" {
+  type        = string
+  description = "cloud-init user"
+  default     = "ansible"
+}
+
+variable "pve_ci_password" {
+  type        = string
+  description = "cloud-init password"
+  default     = null
 }
 
 variable "pve_ci_all_use_dhcp" {
@@ -278,6 +296,26 @@ variable "pve_use_agent" {
   type        = number
   description = "whether or not to use the agent in each VM"
   default     = 1
+}
+
+# Serial Options
+
+variable "pve_add_serial" {
+  type        = bool
+  description = "whether or not to add a serial device to each vm"
+  default     = false
+}
+
+variable "pve_serial_type" {
+  type        = string
+  description = "type of serial device to add to each vm"
+  default     = "socket"
+}
+
+variable "pve_serial_id" {
+  type        = number
+  description = "id of the serial device to add to each vm"
+  default     = 0
 }
 
 #################
