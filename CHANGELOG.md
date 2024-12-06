@@ -1,3 +1,9 @@
+## [1.5.1](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.5.0...1.5.1) (2024-12-06)
+
+### Bug Fixes
+
+* updated required_version for tf ([8fed555](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/8fed555d27f57b1a216aa9ff72cb97faa02ef02b))
+
 ## [1.5.0](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.4.1...1.5.0) (2024-11-26)
 
 ### Features
