@@ -1,3 +1,9 @@
+## [1.5.2](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.5.1...1.5.2) (2024-12-06)
+
+### Bug Fixes
+
+* updated terraform-homelab-pve-vm version to 1.7.1 ([996c28b](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/commit/996c28b20852d08035a96baac11b72274d1da92f))
+
 ## [1.5.1](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.5.0...1.5.1) (2024-12-06)
 
 ### Bug Fixes
