@@ -1,5 +1,5 @@
 module "pve-vm-cluster" {
-  source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm?ref=1.7.0"
+  source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm?ref=1.7.1"
   count  = var.node_count
 
   # Core PVE Fields
