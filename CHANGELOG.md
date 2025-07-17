@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/compare/1.6.0...1.7.0) (2025-07-17)
+
+### Features
+
+* add github cli to devcontainer ([393f1c7](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/commit/393f1c74e797de9b52a4dfbbc5b4c59a9de568e4))
+
 ## [1.6.0](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/compare/1.5.2...1.6.0) (2025-07-17)
 
 ### Bug Fixes
