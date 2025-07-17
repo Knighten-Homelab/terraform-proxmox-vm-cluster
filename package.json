@@ -1,7 +1,7 @@
 {
   "repository": {
     "type": "git",
-    "url": "https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster"
+    "url": "https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.4.1",
