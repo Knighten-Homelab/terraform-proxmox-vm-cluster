@@ -1,3 +1,14 @@
+## [1.6.0](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/compare/1.5.2...1.6.0) (2025-07-17)
+
+### Bug Fixes
+
+* update repository URL to match organization ([66bc5fc](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/commit/66bc5fca33dd08b0fafc535d0bc45e7cbc370e9d))
+
+### Features
+
+* migrate to reusable github actions workflows ([425325e](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/commit/425325e55ff60a71348813ad830157ada7daad0f))
+* migrate to reusable github actions workflows ([#1](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/issues/1)) ([430d4a2](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/commit/430d4a26637437ca71d2cc1ba5ac7c0065b14add))
+
 ## [1.5.2](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster/compare/1.5.1...1.5.2) (2024-12-06)
 
 ### Bug Fixes
