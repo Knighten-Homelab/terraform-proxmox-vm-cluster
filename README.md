@@ -1,24 +1,21 @@
 # Homelab Proxmox VM Cluster Terraform Module
 
-Terraform module which creates a group of Proxmox VMs, registers them with AWX, and creates a PowerDNS A record for each VM.
+Terraform module which creates a group of Proxmox VMs and creates a PowerDNS A record for each VM.
 
-The module is built on top of my [terraform-homelab-pve-vm](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm) module, which creates a single Proxmox VM.
+The module is built on top of my [terraform-proxmox-vm](https://github.com/Knighten-Homelab/terraform-proxmox-vm) module, which creates a single Proxmox VM.
 
 This module is designed to be used with the technology stack I utilize in my homelab. It assumes you are using the following technologies:
 
 - [Proxmox](https://www.proxmox.com/en/)
   - Hypervisor
-- [AWX](https://github.com/ansible/awx)
-  - Ansible Automation Platform
-  - Upstream project for Ansible Tower
-- [PowerDNS](https://www.powerdns.com/)
+- [PowerDNS](https://www.powerdns.com/) (Optional)
   - DNS Server
 
 The main goal of this module was to streamline the creation of nearly identical VMs that would be used to deploy some type of clustered based application (k8s, HA DNS, ...). There are variables that allow you to customize each VM independently to some extent, but the main focus is on creating a group of VMs that are nearly identical. Just like my single VM module, it is not designed to be used by others as it is highly opinionated and tailored to my specific use case; however, it may be useful as a reference for others.
 
 ## Opinionated Decisions
 
-As mentioned above this module is highly opinionated and tailored to my specific use case. To see a non-exhaustive list of opinionated decisions made in this module, see the [Opinionated Decisions section](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm?tab=readme-ov-file#opinionated-decisions) in the single vm module that this module is based off.
+As mentioned above this module is highly opinionated and tailored to my specific use case. To see a non-exhaustive list of opinionated decisions made in this module, see the [Opinionated Decisions section](https://github.com/Knighten-Homelab/terraform-proxmox-vm?tab=readme-ov-file#opinionated-decisions) in the single vm module that this module is based off.
 
 ## Requirements
 
@@ -30,15 +27,54 @@ This module requires Terraform 1.9.8 or later. It may be compatible with earlier
 
 The table below lists the providers required by this module.
 
-| Name     | Source           | Version     |
-| -------- | ---------------- | ----------- |
-| proxmox  | telmate/proxmox  | = 3.0.1-rc4 |
-| powerdns | pan-net/powerdns | = 1.5.0     |
-| awx      | denouche/awx     | = 0.19.0    |
+| Name     | Source           | Version       |
+| -------- | ---------------- | ------------- |
+| proxmox  | telmate/proxmox  | = 3.0.2-rc01 |
+| powerdns | pan-net/powerdns | = 1.5.0       |
 
 You most configure the above providers (URLs, credentials, ...) in your terraform configuration.
 
-_See the [versions.tf](https://github.com/Johnny-Knighten/terraform-homelab-pve-vm/blob/main/versions.tf) in the single vm module for more up to date details._
+_See the [versions.tf](https://github.com/Knighten-Homelab/terraform-proxmox-vm/blob/main/versions.tf) in the single vm module for more up to date details._
+
+## Important: Parallel VM Creation
+
+Due to limitations in the Proxmox provider version 3.0.2-rc01, **parallel VM creation requires specific configuration**. By default, the provider creates VMs sequentially to avoid VM ID conflicts.
+
+### For Parallel Creation
+
+To enable parallel VM creation, you **must** use static VM IDs instead of auto-increment:
+
+```hcl
+module "pve-vm-cluster" {
+  source = "github.com/Knighten-Homelab/terraform-proxmox-vm-cluster"
+  
+  # Required for parallel creation
+  pve_auto_increment_id = false
+  pve_id_list          = [801, 802, 803]  # Static VM IDs
+  
+  # Also recommended
+  pve_auto_increment_names = false
+  pve_name_list           = ["vm-1", "vm-2", "vm-3"]
+  
+  # Enable parallel creation in provider
+  # Set pm_parallel in your provider configuration
+}
+```
+
+And in your provider configuration:
+
+```hcl
+provider "proxmox" {
+  # ... other settings ...
+  pm_parallel = 3  # Number of parallel operations
+}
+```
+
+### Why This Is Required
+
+The Proxmox provider has a known limitation where auto-increment VM IDs can cause race conditions during parallel creation, resulting in VM ID conflicts. See [GitHub Issue #1348](https://github.com/Telmate/terraform-provider-proxmox/issues/1348) for more details.
+
+**Note**: Without static IDs, VMs will be created sequentially even with `pm_parallel` set.
 
 ## Variables
 
@@ -169,34 +205,21 @@ For the `pve_ci_static_address_list` this is the expected object structure (one 
 | `[ve_serial_type` | type of serial device to add to each VM          | `string` | `socket` |    no    |
 | `pve_serial_id`   | id of the serial device to add to each VM        | `string` | `1`      |    no    |
 
-### AWX Variables
-
-You do not need to supply the numeric IDs for the organization, inventory, and inventory groups, the module will look them up based on the name.
-
-| Name                        | Description                                                  | Type           | Default | Required |
-| --------------------------- | ------------------------------------------------------------ | -------------- | ------- | :------: |
-| `awx_organization`          | name of the AWX organization to create the host in           | `string`       | n/a     |   yes    |
-| `awx_inventory`             | name of the AWX inventory to create the host in              | `string`       | n/a     |   yes    |
-| `awx_host_groups`           | comma separated list of AWX host groups to add the host to   | `list(string)` | n/a     |   yes    |
-| `awx_host_name_list`        | list of names for each AWX host to create                    | `list(string)` | n/a     |   yes    |
-| `awx_use_same_host_descrip` | whether or not to use the same description for all AWX hosts | `bool`         | n/a     |   yes    |
-| `awx_host_descrip`          | description for each AWX host created                        | `string`       | n/a     |   yes    |
-| `awx_host_descrip_list`     | list of descriptions for each AWX host created               | `list(string)` | n/a     |    no    |
 
 ### PowerDNS Variables
 
-Currently only a single A record will be created.
-
-| Name                    | Description                                             | Type           | Default | Required |
-| ----------------------- | ------------------------------------------------------- | -------------- | ------- | :------: |
-| `pdns_zone`             | name of the PowerDNS zone to create the record in       | `string`       | n/a     |   yes    |
-| `pdns_record_name_list` | list of names used for PowerDNS records created for VMs | `list(string)` | n/a     |   yes    |
+| Name                    | Description                                                 | Type           | Default | Required |
+| ----------------------- | ----------------------------------------------------------- | -------------- | ------- | :------: |
+| `create_dns_record`     | whether or not to create DNS records for VMs               | `bool`         | `true`  |    no    |
+| `pdns_zone`             | name of the PowerDNS zone to create the record in          | `string`       | n/a     |   yes    |
+| `pdns_record_name_list` | list of names used for PowerDNS records created for VMs    | `list(string)` | n/a     |   yes    |
+| `pdns_ttl`              | TTL value for PowerDNS records                             | `number`       | `300`   |    no    |
 
 ## Outputs
 
-| Name         | Description                                                        | Type           | Sensitive |
-| ------------ | ------------------------------------------------------------------ | -------------- | --------- |
-| `vm_details` | list of VM details including VM ID, VM Descrip,SIP, and DNS record | `list(object)` | no        |
+| Name         | Description                                                      | Type           | Sensitive |
+| ------------ | ---------------------------------------------------------------- | -------------- | --------- |
+| `vm_details` | list of VM details including VM ID, VM Description, IP, and DNS record | `list(object)` | no        |
 
 Here is the expected object structure for the `vm_details` output:
 
@@ -217,11 +240,14 @@ Here is the expected object structure for the `vm_details` output:
 
 ```hcl
 module "pve-vm-cluster" {
-  source     = "github.com/Johnny-Knighten/terraform-homelab-pve-vm-cluster?ref=1.3.3"
+  source     = "github.com/Knighten-Homelab/terraform-proxmox-vm-cluster?ref=1.7.0"
   node_count = 3
 
-  pve_auto_increment_id_start = 500
-  pve_base_name               = "test-cluster-node"
+  # For parallel creation, use static IDs (recommended)
+  pve_auto_increment_id = false
+  pve_id_list          = [500, 501, 502]
+  pve_auto_increment_names = false  
+  pve_name_list        = ["test-cluster-node-0", "test-cluster-node-1", "test-cluster-node-2"]
   pve_node                    = "node-alpha"
   pve_desc                    = "Test VM Cluster Node"
 
@@ -265,22 +291,14 @@ module "pve-vm-cluster" {
     }
   ]
 
+  # DNS configuration (optional)
+  create_dns_record = true
   pdns_zone = "homelab.lan"
   pdns_record_name_list = [
-    "test-cluster-node-1",
+    "test-cluster-node-0",
+    "test-cluster-node-1", 
     "test-cluster-node-2",
-    "test-cluster-node-3",
   ]
-
-  awx_organization = "Homelab"
-  awx_inventory    = "Homelab Endpoints"
-  awx_host_groups  = ["proxmox-hosts"]
-  awx_host_name_list = [
-    "test-cluster-node1",
-    "test-cluster-node-2",
-    "test-cluster-node-3",
-  ]
-  awx_use_same_host_descrip = true
-  awx_host_descrip          = "Talos Test Control Plane"
+  pdns_ttl = 300
 }
 ```

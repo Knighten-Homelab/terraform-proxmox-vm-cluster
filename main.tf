@@ -1,5 +1,5 @@
 module "pve-vm-cluster" {
-  source = "github.com/Johnny-Knighten/terraform-homelab-pve-vm?ref=1.7.1"
+  source = "github.com/Knighten-Homelab/terraform-proxmox-vm?ref=2.8.0"
   count  = var.node_count
 
   # Core PVE Fields
@@ -44,9 +44,9 @@ module "pve-vm-cluster" {
   pve_ci_dns_servers        = var.pve_ci_dns_servers
   pve_ci_storage_location   = var.pve_ci_storage_location
   pve_ci_use_dhcp           = var.pve_ci_all_use_dhcp
-  pve_ci_ip_address         = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].ip_address
-  pve_ci_cidr_prefix_length = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].cidr_prefix_length
-  pve_ci_gateway_address    = var.pve_ci_all_use_dhcp ? null : var.pve_ci_static_address_list[count.index].gateway
+  pve_ci_ip_address         = var.pve_ci_all_use_dhcp ? "" : var.pve_ci_static_address_list[count.index].ip_address
+  pve_ci_cidr_prefix_length = var.pve_ci_all_use_dhcp ? "" : var.pve_ci_static_address_list[count.index].cidr_prefix_length
+  pve_ci_gateway_address    = var.pve_ci_all_use_dhcp ? "" : var.pve_ci_static_address_list[count.index].gateway
 
   # Disk Configuration
   pve_disk_size             = var.pve_disk_size
@@ -61,13 +61,8 @@ module "pve-vm-cluster" {
   pve_serial_id   = var.pve_serial_id
 
   # PDNS Options
-  pdns_zone        = var.pdns_zone
-  pdns_record_name = var.pdns_record_name_list[count.index]
-
-  # AWX Options
-  awx_organization     = var.awx_organization
-  awx_inventory        = var.awx_inventory
-  awx_host_groups      = var.awx_host_groups
-  awx_host_name        = var.awx_host_name_list[count.index]
-  awx_host_description = var.awx_use_same_host_descrip ? var.awx_host_descrip : var.awx_host_descrip_list[count.index]
+  create_dns_record = var.create_dns_record
+  pdns_zone         = var.pdns_zone
+  pdns_record_name  = var.pdns_record_name_list[count.index]
+  pdns_ttl          = var.pdns_ttl
 }
