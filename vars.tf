@@ -318,49 +318,16 @@ variable "pve_serial_id" {
   default     = 0
 }
 
-#################
-# AWX Variables #
-#################
-
-variable "awx_organization" {
-  type        = string
-  description = "name of the AWX organization to create the host in"
-}
-
-variable "awx_inventory" {
-  type        = string
-  description = "name of the AWX inventory to create the host in"
-}
-
-variable "awx_host_groups" {
-  type        = list(string)
-  description = "comma separated list of AWX host groups to add the host to"
-}
-
-variable "awx_host_name_list" {
-  type        = list(string)
-  description = "list of names for each AWX host to create"
-}
-
-variable "awx_use_same_host_descrip" {
-  type        = bool
-  description = "whether or not to use the same description for all AWX hosts"
-}
-
-variable "awx_host_descrip" {
-  type        = string
-  description = "description for each AWX host created "
-}
-
-variable "awx_host_descrip_list" {
-  type        = list(string)
-  description = "list of descriptions for each AWX host created "
-  default     = []
-}
 
 ############
 # PowerDNS #
 ############
+
+variable "create_dns_record" {
+  type        = bool
+  description = "whether or not to create DNS records for VMs"
+  default     = true
+}
 
 variable "pdns_zone" {
   type        = string
@@ -370,4 +337,10 @@ variable "pdns_zone" {
 variable "pdns_record_name_list" {
   type        = list(string)
   description = "list of names used for PowerDNS records created for VMs"
+}
+
+variable "pdns_ttl" {
+  type        = number
+  description = "TTL value for PowerDNS records"
+  default     = 300
 }
