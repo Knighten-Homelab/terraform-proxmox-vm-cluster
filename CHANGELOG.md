@@ -1,3 +1,11 @@
+## [1.7.0](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/compare/1.6.0...1.7.0) (2025-07-21)
+
+### Features
+
+* add github cli to devcontainer ([393f1c7](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/commit/393f1c74e797de9b52a4dfbbc5b4c59a9de568e4))
+* align husky pre-commit hook with terraform-proxmox-vm ([#5](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/issues/5)) ([4b5d7b0](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/commit/4b5d7b061b4dc4ce260dfd4adde2ccf62f970499))
+* migrate to terraform-proxmox-vm v2.8.0 ([#4](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/issues/4)) ([4a57888](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/commit/4a57888127cbf6a16d0b291b7c3ff229378729d0))
+
 ## [1.7.0](https://github.com/Knighten-Homelab/terraform-proxmox-vm-cluster/compare/1.6.0...1.7.0) (2025-07-20)
 
 ### Features
