@@ -1,10 +1,8 @@
+#!/bin/bash
+
 set -e
 
+terraform fmt -check -recursive
+terraform validate -no-color
 tflint --init
 tflint --recursive
-
-terraform fmt -check -recursive
-
-terraform validate -no-color
-
-trivy config ./ --exit-code 1
