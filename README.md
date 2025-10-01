@@ -1,6 +1,6 @@
 # Homelab Proxmox VM Cluster Terraform Module
 
-Terraform module which creates a group of Proxmox VMs and creates a PowerDNS A record for each VM.
+Terraform module which creates a group of Proxmox VMs and creates a DNS A record for each VM.
 
 The module is built on top of my [terraform-proxmox-vm](https://github.com/Knighten-Homelab/terraform-proxmox-vm) module, which creates a single Proxmox VM.
 
@@ -8,8 +8,8 @@ This module is designed to be used with the technology stack I utilize in my hom
 
 - [Proxmox](https://www.proxmox.com/en/)
   - Hypervisor
-- [PowerDNS](https://www.powerdns.com/) (Optional)
-  - DNS Server
+- DNS Server supporting RFC 2136 Dynamic Updates (Optional)
+  - Examples: BIND9, PowerDNS, Knot DNS, Technitium DNS
 
 The main goal of this module was to streamline the creation of nearly identical VMs that would be used to deploy some type of clustered based application (k8s, HA DNS, ...). There are variables that allow you to customize each VM independently to some extent, but the main focus is on creating a group of VMs that are nearly identical. Just like my single VM module, it is not designed to be used by others as it is highly opinionated and tailored to my specific use case; however, it may be useful as a reference for others.
 
@@ -27,12 +27,12 @@ This module requires Terraform 1.9.8 or later. It may be compatible with earlier
 
 The table below lists the providers required by this module.
 
-| Name     | Source           | Version       |
-| -------- | ---------------- | ------------- |
-| proxmox  | telmate/proxmox  | = 3.0.2-rc01 |
-| powerdns | pan-net/powerdns | = 1.5.0       |
+| Name    | Source          | Version      |
+| ------- | --------------- | ------------ |
+| proxmox | telmate/proxmox | = 3.0.2-rc01 |
+| dns     | hashicorp/dns   | ~> 3.4       |
 
-You most configure the above providers (URLs, credentials, ...) in your terraform configuration.
+You must configure the above providers (URLs, credentials, ...) in your terraform configuration.
 
 _See the [versions.tf](https://github.com/Knighten-Homelab/terraform-proxmox-vm/blob/main/versions.tf) in the single vm module for more up to date details._
 
@@ -102,6 +102,7 @@ The Proxmox provider has a known limitation where auto-increment VM IDs can caus
 | `pve_same_descrip`            | whether or not to use a unique description for each VM                                | `bool`         | `true`         |    no    |
 | `pve_desc`                    | description to use for all VMs, if using `pve_same_descrip` == `true`                 | `string`       | `cluster node` |    no    |
 | `pve_desc_list`               | list of descriptions to use for each VM, if not using same description for all vms    | `list(string)` | `[]`           |    no    |
+| `pve_tags`                    | comma-separated tags to apply to all VMs                                              | `string`       | `""`           |    no    |
 
 #### Cloning and Template Variables
 
@@ -206,14 +207,14 @@ For the `pve_ci_static_address_list` this is the expected object structure (one 
 | `pve_serial_id`   | id of the serial device to add to each VM        | `string` | `1`      |    no    |
 
 
-### PowerDNS Variables
+### DNS Variables
 
-| Name                    | Description                                                 | Type           | Default | Required |
-| ----------------------- | ----------------------------------------------------------- | -------------- | ------- | :------: |
-| `create_dns_record`     | whether or not to create DNS records for VMs               | `bool`         | `true`  |    no    |
-| `pdns_zone`             | name of the PowerDNS zone to create the record in          | `string`       | n/a     |   yes    |
-| `pdns_record_name_list` | list of names used for PowerDNS records created for VMs    | `list(string)` | n/a     |   yes    |
-| `pdns_ttl`              | TTL value for PowerDNS records                             | `number`       | `300`   |    no    |
+| Name                   | Description                                              | Type           | Default | Required |
+| ---------------------- | -------------------------------------------------------- | -------------- | ------- | :------: |
+| `create_dns_record`    | whether or not to create DNS records for VMs            | `bool`         | `true`  |    no    |
+| `dns_zone`             | name of the DNS zone to create the record in            | `string`       | n/a     |   yes    |
+| `dns_record_name_list` | list of names used for DNS records created for VMs      | `list(string)` | n/a     |   yes    |
+| `dns_ttl`              | TTL value for DNS records in seconds                    | `number`       | `60`    |    no    |
 
 ## Outputs
 
@@ -240,16 +241,17 @@ Here is the expected object structure for the `vm_details` output:
 
 ```hcl
 module "pve-vm-cluster" {
-  source     = "github.com/Knighten-Homelab/terraform-proxmox-vm-cluster?ref=1.7.0"
+  source     = "github.com/Knighten-Homelab/terraform-proxmox-vm-cluster?ref=3.0.0"
   node_count = 3
 
   # For parallel creation, use static IDs (recommended)
   pve_auto_increment_id = false
   pve_id_list          = [500, 501, 502]
-  pve_auto_increment_names = false  
+  pve_auto_increment_names = false
   pve_name_list        = ["test-cluster-node-0", "test-cluster-node-1", "test-cluster-node-2"]
   pve_node                    = "node-alpha"
   pve_desc                    = "Test VM Cluster Node"
+  pve_tags                    = "terraform,cluster,test"
 
   pve_is_clone   = true
   pve_full_clone = true
@@ -293,12 +295,12 @@ module "pve-vm-cluster" {
 
   # DNS configuration (optional)
   create_dns_record = true
-  pdns_zone = "homelab.lan"
-  pdns_record_name_list = [
+  dns_zone = "homelab.lan"
+  dns_record_name_list = [
     "test-cluster-node-0",
-    "test-cluster-node-1", 
+    "test-cluster-node-1",
     "test-cluster-node-2",
   ]
-  pdns_ttl = 300
+  dns_ttl = 60
 }
 ```
