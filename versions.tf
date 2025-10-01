@@ -6,9 +6,9 @@ terraform {
       source  = "telmate/proxmox"
       version = "3.0.2-rc01"
     }
-    powerdns = {
-      source  = "pan-net/powerdns"
-      version = "1.5.0"
+    dns = {
+      source  = "hashicorp/dns"
+      version = "~> 3.4"
     }
   }
 }

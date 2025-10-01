@@ -92,6 +92,14 @@ variable "pve_desc_list" {
   default     = []
 }
 
+# VM Tags Variables
+
+variable "pve_tags" {
+  type        = string
+  description = "comma-separated tags to apply to all VMs"
+  default     = ""
+}
+
 # Clone/Template Variables 
 
 variable "pve_is_clone" {
@@ -319,9 +327,9 @@ variable "pve_serial_id" {
 }
 
 
-############
-# PowerDNS #
-############
+########################
+# DNS Configuration    #
+########################
 
 variable "create_dns_record" {
   type        = bool
@@ -329,18 +337,18 @@ variable "create_dns_record" {
   default     = true
 }
 
-variable "pdns_zone" {
+variable "dns_zone" {
   type        = string
-  description = "name of the PowerDNS zone to create the record in"
+  description = "name of the DNS zone to create the record in"
 }
 
-variable "pdns_record_name_list" {
+variable "dns_record_name_list" {
   type        = list(string)
-  description = "list of names used for PowerDNS records created for VMs"
+  description = "list of names used for DNS records created for VMs"
 }
 
-variable "pdns_ttl" {
+variable "dns_ttl" {
   type        = number
-  description = "TTL value for PowerDNS records"
-  default     = 300
+  description = "TTL value for DNS records"
+  default     = 60
 }

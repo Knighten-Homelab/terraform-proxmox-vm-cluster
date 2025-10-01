@@ -1,5 +1,5 @@
 module "pve-vm-cluster" {
-  source = "github.com/Knighten-Homelab/terraform-proxmox-vm?ref=2.8.0"
+  source = "github.com/Knighten-Homelab/terraform-proxmox-vm?ref=3.0.0"
   count  = var.node_count
 
   # Core PVE Fields
@@ -9,6 +9,7 @@ module "pve-vm-cluster" {
   # Metadata Fields
   pve_name = var.pve_auto_increment_names ? format("%s-%s", var.pve_base_name, count.index) : var.pve_name_list[count.index]
   pve_desc = var.pve_same_descrip ? var.pve_desc : var.pve_desc_list[count.index]
+  pve_tags = var.pve_tags
 
   # Clone/Template Fields
   pve_is_clone   = var.pve_is_clone
@@ -60,9 +61,9 @@ module "pve-vm-cluster" {
   pve_serial_type = var.pve_serial_type
   pve_serial_id   = var.pve_serial_id
 
-  # PDNS Options
+  # DNS Options
   create_dns_record = var.create_dns_record
-  pdns_zone         = var.pdns_zone
-  pdns_record_name  = var.pdns_record_name_list[count.index]
-  pdns_ttl          = var.pdns_ttl
+  dns_zone          = var.dns_zone
+  dns_record_name   = var.dns_record_name_list[count.index]
+  dns_ttl           = var.dns_ttl
 }

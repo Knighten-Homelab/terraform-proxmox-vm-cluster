@@ -1,24 +1,23 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
-provider "registry.terraform.io/pan-net/powerdns" {
-  version     = "1.5.0"
-  constraints = "1.5.0"
+provider "registry.terraform.io/hashicorp/dns" {
+  version     = "3.4.3"
+  constraints = "~> 3.4"
   hashes = [
-    "h1:bsz18KLloevlTZkXwZr8u0sFCZKcOYyts2RaWkV6YNc=",
-    "zh:02d1a87c28635779f66d1dcf165b5f16530f809deb6c71c35c3e58d715a88bf4",
-    "zh:1285a419c7fd2947f891771bd77d2f6e7dd0cb00621c547b6993947085616009",
-    "zh:340faecd0a0036e721480564acbad2ba0da6a9c0c0cd633957dcde76a4ba3798",
-    "zh:5646f78d9980038c4ae70e09828da01c7cc6ba2b3b1e9ea8a1988efafaba1b75",
-    "zh:66fef65aede775d9972be163a2bd25d8fda5a8ad2235ceef30d515bf35e2e5d4",
-    "zh:7130faa5dd892b1d41b9b3ebd1b2d7854bf780193073de58806e088311bb554c",
-    "zh:9f47b66ce7f4b23d25c4a726ffc5e504f797f247912cfa5dff23b3da0ba18982",
-    "zh:ada63a886bc5d7980eeb22b59b166713617847626627007d2e8429eeb4346327",
-    "zh:c853237b7831942d3d0f0f7a7a334e8f9df8a12f217c5680a76db256e368230d",
-    "zh:d2e8827d9d8662a892dbd1df6155823c8167db6f6762f38885037c7da87612b1",
-    "zh:d6e1069bb9d9f368e5d55a8bdf55de23636a586d698515f0075733499d6b9ccc",
-    "zh:dd224d521af2f72bfdc3498c5ccd54b09844cfaa347b3008f61faad465cc9769",
-    "zh:e02960d79ccfeeaea64c07aa1ad88cdd3688f49b670c9b607ea188283cd519d6",
+    "h1:8wz2nUJwdMb9YWFX67SbX5HoFLINXm+XRQxWxVy0I1I=",
+    "zh:11526db629adb59e5069aa9af6549f9a274e00365db5e2ea32ed3fef548b2112",
+    "zh:198a1cd01c6bcb2c00146ac38aabcf04e9f027442bbe9c3ec7aa31220a6964d9",
+    "zh:3b6d141ef3ad2978b6efddc780b3444e50e4c3988ccd45f8756398669ec52189",
+    "zh:561adc509f35999e42b2b519eb84e937dd2a3b30138c401834ea9a2adc7418a6",
+    "zh:61960b0e2d5bcdba1fbe3863f636e06727d7330a9f63a92f42bdb511f1943119",
+    "zh:78d5eefdd9e494defcb3c68d282b8f96630502cac21d1ea161f53cfe9bb483b3",
+    "zh:7ee3a93fe3e45ad16285f2d0ca3a6b6afc4906784b2da1af89a3a0818f3b303b",
+    "zh:7fc8329861864ee69fffa29b17cafbe67eecbcef3c30749e31659d7837ac8983",
+    "zh:b29c35262e7fc6619ac80fa38d13076975b613e6a884044bd163599413596e35",
+    "zh:b778b9c4dfba7ae2ac1658bb4b0d1c45a5edd80893e1f8bbee4b080145a11909",
+    "zh:f41a325947b78f4d9b51a68a0c6167bc37302356ec47bc8e513106f4f58db732",
+    "zh:fd7110602e3fc39f70e2b757ffae675fc8232dd3d8534892a0b91e4d5c7539ff",
   ]
 }
 
